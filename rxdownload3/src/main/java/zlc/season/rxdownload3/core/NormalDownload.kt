@@ -39,7 +39,7 @@ class NormalDownload(mission: RealMission) : DownloadType(mission) {
         return Maybe.just(ANY)
                 .flatMap { HttpCore.download(mission) }
                 .flatMapPublisher {
-                    targetFile.save(it)
+                    targetFile.save(it,mission.actual.tag)
                 }
     }
 }

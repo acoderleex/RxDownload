@@ -49,7 +49,7 @@ class NormalTargetFile(val mission: RealMission) {
         shadowFile.createNewFile()
     }
 
-    fun save(response: Response<ResponseBody>): Flowable<Status> {
+    fun save(response: Response<ResponseBody>,url:String): Flowable<Status> {
         val respBody = response.body() ?: throw RuntimeException("Response body is NULL")
 
         val period = (1000 / DownloadConfig.fps).toLong()
@@ -58,7 +58,7 @@ class NormalTargetFile(val mission: RealMission) {
         val byteSize = 8192L
         val totalSize = respBody.contentLength()
 
-        val downloading = Downloading(Status(mission.actual.url,downloadSize, totalSize, isChunked(response)))
+        val downloading = Downloading(Status(url,downloadSize, totalSize, isChunked(response)))
 
         return Flowable.create<Status>({
             respBody.source().use { source ->

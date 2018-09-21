@@ -4,7 +4,8 @@ import zlc.season.rxdownload3.helper.formatSize
 import java.text.NumberFormat.getPercentInstance
 
 
-open class Status(var url: String,
+open class Status(
+        var url: String,
                   var downloadSize: Long = 0L,
                   var totalSize: Long = 0L,
                   var chunkFlag: Boolean = false) {
